@@ -225,14 +225,14 @@ We can also add colors for all the points:
 
 ```{r adding-colors, purl=FALSE}
 ggplot(data = surveys_complete, mapping = aes(x = weight, y = hindfoot_length)) +
-    geom_point(alpha = 0.1, color = "blue")
+    geom_point(alpha = 0.1, color = "green")
 ```
 
 Or to color each species in the plot differently, you could use a vector as an input to the argument **color**. **`ggplot2`** will provide a different color corresponding to different values in the vector. Here is an example where we color with **`species_id`**:
 
 ```{r color-by-species-1, purl=FALSE}
 ggplot(data = surveys_complete, mapping = aes(x = weight, y = hindfoot_length)) +
-    geom_point(alpha = 0.1, aes(color = species_id))
+    geom_point(alpha = 0.1, aes(color = purple))
 ```
 
 :::::::::::::::::::::::::::::::::::::::  challenge
@@ -248,7 +248,7 @@ Is this a good way to show this type of data?
 ```{r scatter-challenge-answer, answer=TRUE, purl=FALSE}
 ggplot(data = surveys_complete,
        mapping = aes(x = species_id, y = weight)) +
-   geom_point(aes(color = plot_type))
+   geom_point(aes(color = red))
 ```
 
 :::::::::::::::::
@@ -281,7 +281,7 @@ to the boxplot by specifying `outlier.shape = NA`.
 ```{r boxplot-with-points, purl=FALSE}
 ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) +
     geom_boxplot(outlier.shape = NA) +
-    geom_jitter(alpha = 0.3, color = "tomato")
+    geom_jitter(alpha = 0.3, color = "pink")
 ```
 
 Notice how the boxplot layer is behind the jitter layer? What do you need to
@@ -303,7 +303,7 @@ a beanplot), where the shape (of the density of points) is drawn.
 
 ```{r, answer=TRUE, purl=FALSE}
 ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) +
-geom_jitter(alpha = 0.3, color = "tomato") +
+geom_jitter(alpha = 0.3, color = "pink") +
 geom_violin() 
 ```
 
@@ -322,7 +322,7 @@ incrementally adding commands). Try making these modifications:
 ```{r, answer=TRUE, purl=FALSE}
 ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) +
 scale_y_log10() +
-geom_jitter(alpha = 0.3, color = "tomato") +
+geom_jitter(alpha = 0.3, color = "pink") +
 geom_boxplot(outlier.shape = NA)
 ```
 
@@ -338,7 +338,7 @@ a new plot to explore the distribution of another variable within each species.
 
 ```{r, answer=TRUE, purl=FALSE}
 ggplot(data = surveys_complete, mapping = aes(x = species_id, y = hindfoot_length)) +
-geom_jitter(alpha = 0.3, color = "tomato") +
+geom_jitter(alpha = 0.3, color = "pink") +
 geom_boxplot(outlier.shape = NA)
 ```
 
@@ -356,7 +356,7 @@ from integer to factor. Why does this change how R makes the graph?
 ## Challenge with boxplots:
 ##  Start with the boxplot we created:
 ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) +
-  geom_jitter(alpha = 0.3, color = "tomato") +
+  geom_jitter(alpha = 0.3, color = "pink") +
   geom_boxplot(outlier.shape = NA)
 ## By ordering the geom layers like this, we can make sure that the boxplot is
 ## layered over the jittered points.
@@ -429,7 +429,7 @@ The pipe operator can also be used to link data manipulation with consequent dat
 ```{r pipes-and-manipulation, purl=FALSE}
 yearly_counts_graph <- surveys_complete %>%
     count(year, genus) %>%
-    ggplot(mapping = aes(x = year, y = n, color = genus)) +
+    ggplot(mapping = aes(x = year, y = n, color = orange)) +
     geom_line()
 
 yearly_counts_graph
@@ -469,7 +469,7 @@ We can also facet both by sex and genus:
 
 ```{r average-weight-time-facet-both, purl=FALSE, fig.width=9.5}
 ggplot(data = yearly_sex_counts,
-       mapping = aes(x = year, y = n, color = sex)) +
+       mapping = aes(x = year, y = n, color = orange)) +
   geom_line() +
   facet_grid(rows = vars(sex), cols =  vars(genus))
 ```
@@ -479,7 +479,7 @@ You can also organise the panels only by rows (or only by columns):
 ```{r average-weight-time-facet-sex-rows, purl=FALSE, fig.height=8.5, fig.width=8}
 # One column, facet by rows
 ggplot(data = yearly_sex_counts,
-       mapping = aes(x = year, y = n, color = sex)) +
+       mapping = aes(x = year, y = n, color = orange)) +
   geom_line() +
   facet_grid(rows = vars(genus))
 ```
@@ -487,7 +487,7 @@ ggplot(data = yearly_sex_counts,
 ```{r average-weight-time-facet-sex-columns, purl=FALSE, fig.width=9.5, fig.height=5}
 # One row, facet by column
 ggplot(data = yearly_sex_counts,
-       mapping = aes(x = year, y = n, color = sex)) +
+       mapping = aes(x = year, y = n, color = orange)) +
   geom_line() +
   facet_grid(cols = vars(genus))
 ```
